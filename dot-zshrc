@@ -1,0 +1,55 @@
+eval "$(starship init zsh)"
+
+export PATH="/opt/homebrew/bin:$PATH:~/.local/scripts"
+export SSH_AUTH_SOCK='/var/folders/4y/ghzxvntn1vqg1vt0vr6hhzl8lsy3zq/T/keeper-ssh-agent.sock'
+
+export NETSKOPE_CA_BUNDLE="/Library/Application Support/Netskope/STAgent/data/nscacert_combined.pem"
+export ARTIFACTORY_SECRET=$(security find-generic-password -s artifactory_token -a "$USER" -w 2>/dev/null)
+
+export CARGO_REGISTRIES_ARTIFACTORY_TOKEN="Bearer $ARTIFACTORY_SECRET"
+export CARGO_REGISTRIES_CARGO_LOCAL_TOKEN="Bearer $ARTIFACTORY_SECRET"
+export HOMEBREW_ARTIFACTORY_SECRET=$ARTIFACTORY_SECRET
+export UV_SYSTEM_CERTS=true
+export REQUESTS_CA_BUNDLE=$NETSKOPE_CA_BUNDLE
+export SSL_CERT_FILE=$NETSKOPE_CA_BUNDLE
+#export REQUESTS_CA_BUNDLE="/Library/Application Support/Netskope/STAgent/data/nstenantcert.pem"
+#export SSL_CERT_FILE="/Library/Application Support/Netskope/STAgent/data/nstenantcert.pem"
+
+export GOPROXY=direct
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+### End of Zinit's installer chunk
+
+
+# Zinit Plugins
+zinit load Tarrasch/zsh-autoenv
+zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+
+
+# Aliases
+
+alias ls="eza --icons"
+alias mount-fw13="sshfs steve@192.168.101.175:/home/steve ~/mnt/fw13 -o volname=Framework13,defer_permissions,follow_symlinks,auto_cache"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

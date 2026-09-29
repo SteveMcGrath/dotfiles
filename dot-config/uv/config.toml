@@ -1,0 +1,7 @@
+allow-insecure-host = ["artifactory.eng.tenable.com"]
+
+[[index]]
+url = "https://artifactory.eng.tenable.com/artifactory/api/pypi/pypi-remote/simple"
+
+[[index]]
+url = "https://artifactory.eng.tenable.com/artifactory/api/pypi/tenable_pypigroup/simple"

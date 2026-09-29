@@ -1,0 +1,26 @@
+theme = "monokai_pro_machine"
+
+[editor]
+end-of-line-diagnostics = "hint"
+shell = ['fish', '-c']
+color-modes = true
+true-color = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
+[editor.indent-guides]
+render = true
+character = '┊'
+skip-levels = 1
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-l = ["extend_to_line_end"]
+S-up = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+S-down = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+S-left = ["unindent"]
+S-right = ["indent"]

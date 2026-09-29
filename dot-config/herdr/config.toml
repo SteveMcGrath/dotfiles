@@ -1,0 +1,11 @@
+onboarding = false
+
+[terminal]
+default_shell = "fish"
+
+[keys]
+switch_workspace = "prefix+shift+1..9"
+
+[theme.custom]
+accent = "#E7FF00"
+subtext0 = "#E7FF00"

@@ -1,0 +1,21 @@
+[registry]
+default = "artifactory"
+global-credential-providers = ["cargo:token"]
+
+[registries.artifactory]
+index = "sparse+https://artifactory.eng.tenable.com/artifactory/api/cargo/cargo-remote-proxy/index/"
+
+# To download from internal artifartory cargo-local-dev registry
+[registries.cargo-local-dev]
+index = "sparse+https://artifactory.eng.tenable.com/artifactory/api/cargo/cargo-local-dev/index/"
+
+# To download from internal artifartory cargo-local registry
+[registries.cargo-local]
+index = "sparse+https://artifactory.eng.tenable.com/artifactory/api/cargo/cargo-local/index/"
+
+# Replace crates.io with artifactory remote repo
+[source.artifactory]
+registry = "sparse+https://artifactory.eng.tenable.com/artifactory/api/cargo/cargo-remote-proxy/index/"
+
+[source.crates-io]
+replace-with = "artifactory"

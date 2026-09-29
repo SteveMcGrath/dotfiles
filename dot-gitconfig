@@ -1,0 +1,37 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+
+[core]
+	pager = delta
+	editor = hx
+
+[interactive]
+	diffFilter = delta --color-only
+
+[push]
+	autoSetupRemote = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[user]
+	name = "Steve McGrath"
+	email = "smcgrath@tenable.com"
+	signingkey = ~/.ssh/id_ed25519
+
+[delta]
+	line-numbers = true
+	navigate = true
+	dark = true
