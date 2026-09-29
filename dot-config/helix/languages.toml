@@ -86,6 +86,7 @@ name = "yaml"
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 formatter = { command = "prettier", args = ["--parser", "yaml"] }
+
 [[language]]
 name = "sql"
 indent = { tab-width = 4, unit = "    " }
